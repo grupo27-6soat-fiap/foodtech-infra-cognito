@@ -1,0 +1,45 @@
+name: 'Terraform'
+
+on:
+  push:
+    branches:
+      - main  # Define em quais branches este workflow será executado
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest  # Define o tipo de runner que o GitHub usará
+    defaults:
+      run:
+        working-directory: terraform
+
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@v2  # Faz o checkout do seu repositório
+
+    - name: 'Setup Terraform'
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: '1.0.0'  # Substitua pela versão desejada
+
+    - name: 'Configure AWS Credentials'
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: 'us-east-1'  # Substitua pela região desejada
+
+    - name: 'Terraform Init'
+      run: terraform init
+
+    - name: 'Terraform Validate'
+      run: terraform validate
+
+    # Opcional: Adicione os passos para terraform plan e terraform apply conforme necessário
+    - name: 'Terraform Plan'
+      run: terraform plan
+
+    # Descomente a próxima linha para aplicar as mudanças automaticamente
+    - name: 'Terraform Apply'
+      run: terraform apply -auto-approve
+ 
