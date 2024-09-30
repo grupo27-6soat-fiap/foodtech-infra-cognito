@@ -4,7 +4,7 @@
 Este repositório contém a configuração do **Terraform** para gerenciar os recursos do **AWS Cognito** usados pelo sistema **Foodtech**. Além disso, um workflow do **GitHub Actions** automatiza o provisionamento da infraestrutura.
 
 ## Visão Geral do Projeto
-
+ 
 Este projeto utiliza **infraestrutura como código** (IaC) para criar e gerenciar os recursos do **AWS Cognito**, que serão usados para autenticação de usuários no sistema **Foodtech**.
 
 ## Recursos Criados
